@@ -22,7 +22,8 @@ export const postJob = async (req, res) => {
       !experienceLevel ||
       !requirements ||
       !jobType ||
-      !position
+      !position ||
+      !companyId
     ) {
       return res.status(400).json({
         message: "All fields are required",
@@ -69,7 +70,11 @@ export const getAllJobs = async (req, res) => {
         },
       ],
     };
-    const jobs = await Job.find(query);
+    const jobs = await Job.find(query)
+      .populate({
+        path: "company",
+      })
+      .sort({ createdAt: -1 });
     if (!jobs) {
       return res.status(404).json({
         message: "No jobs found",

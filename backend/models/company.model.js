@@ -8,19 +8,19 @@ const companySchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      required: true,
+      // required: true,
     },
     website: {
       type: String,
-      required: true,
+      // required: true,
     },
     location: {
       type: String,
-      required: true,
+      // required: true,
     },
     logo: {
       type: String,
-      required: true,
+      // required: true,
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,

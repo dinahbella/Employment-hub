@@ -1,9 +1,11 @@
+import { Company } from "../models/company.model.js";
+
 export const registerCompany = async (req, res) => {
   try {
     const { companyName } = req.body;
     if (!companyName) {
       return res.status(400).json({
-        message: "Companyu Name is required",
+        message: "Company Name is required",
         success: false,
       });
     }
@@ -15,11 +17,12 @@ export const registerCompany = async (req, res) => {
       });
     }
     company = await Company.create({
-      companyName,
+      companyName: companyName,
       userId: req.id,
     });
     return res.status(201).json({
       message: "Company created successfully",
+      company,
       success: true,
     });
   } catch (error) {
@@ -40,6 +43,11 @@ export const getCompany = async (req, res) => {
         success: false,
       });
     }
+    return res.status(200).json({
+      companies,
+      message: "Companies found",
+      success: true,
+    });
   } catch (error) {
     console.log(error);
   }
